@@ -47,7 +47,7 @@ Parallel then callback
 
 will compile to
 
-    var _r1, a, _r2, b, c;
+    var a, b, c;
 
     var count = 2;
 
@@ -84,7 +84,7 @@ Parallel then grouped callback
 
 will compile to
 
-    var _r1, a, _r2, b, _r3, c, d, e, f;
+    var a, b, c, d, e, f;
 
     var _done = 0, triggers = [ function() {
         if (_done & 3) {
