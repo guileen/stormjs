@@ -6,5 +6,7 @@ foo(function(_err, _r1) {
     foo(a, function(_err, _r2) {
         if (_err) return cb(_err);
         b = _r2;
+        console.log("b=" + b);
     });
+    console.log("a=" + a);
 });
