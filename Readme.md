@@ -148,3 +148,19 @@ Usage
 ====
 
     storm filename
+
+Run examples
+====
+
+    node examples/check_output.js [-o] [-e] [-nt] [filename...]
+
+    -o  overwrite .out.js
+    -e  execute .out.js
+    -nt no test compile code
+
+to execute examples/groups.js
+
+    node examples/check_output.js -e groups
+
+about the foo, foo will log arguments passed in and callback the arguments
+after random ms.
