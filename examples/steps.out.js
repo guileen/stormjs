@@ -1,4 +1,4 @@
-var _r1, a, _r2, b, c;
+var a, b, c;
 
 var count = 2;
 
@@ -11,16 +11,14 @@ function update() {
     }
 }
 
-foo(function(_err, __r1) {
+foo(function(_err, _r1) {
     if (_err) return cb(_err);
-    _r1 = __r1;
     a = _r1;
     update();
 });
 
-foo(function(_err, __r2) {
+foo(function(_err, _r2) {
     if (_err) return cb(_err);
-    _r2 = __r2;
     b = _r2;
     update();
 });

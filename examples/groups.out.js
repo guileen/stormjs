@@ -1,4 +1,4 @@
-var _r1, a, _r2, b, _r3, c, d, e, f;
+var a, b, c, d, e, f;
 
 var _done = 0, triggers = [ function() {
     if (_done & 3) {
@@ -32,25 +32,22 @@ function trigger() {
     }
 }
 
-foo(function(_err, __r1) {
+foo(function(_err, _r1) {
     if (_err) return cb(_err);
-    _r1 = __r1;
     _done |= 1;
     process.nextTick(trigger);
     a = _r1;
 });
 
-foo(function(_err, __r2) {
+foo(function(_err, _r2) {
     if (_err) return cb(_err);
-    _r2 = __r2;
     _done |= 2;
     process.nextTick(trigger);
     b = _r2;
 });
 
-foo(function(_err, __r3) {
+foo(function(_err, _r3) {
     if (_err) return cb(_err);
-    _r3 = __r3;
     _done |= 4;
     process.nextTick(trigger);
     c = _r3;
