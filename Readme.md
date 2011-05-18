@@ -86,25 +86,25 @@ will compile to
 
     var a, b, c, d, e, f;
 
-    var _done = 0, triggers = [ function() {
-        if (_done & 3) {
-            triggers.splice(triggers.indexOf(this), 1);
+    var _done = 0, triggers = [ function(_index) {
+        if (3 === (_done & 3)) {
+            triggers.splice(_index, 1);
             foo(a, b, function(_err, _r4) {
                 if (_err) return cb(_err);
                 d = _r4;
             });
         }
-    }, function() {
-        if (_done & 5) {
-            triggers.splice(triggers.indexOf(this), 1);
+    }, function(_index) {
+        if (5 === (_done & 5)) {
+            triggers.splice(_index, 1);
             foo(a, c, function(_err, _r5) {
                 if (_err) return cb(_err);
                 e = _r5;
             });
         }
-    }, function() {
-        if (_done & 6) {
-            triggers.splice(triggers.indexOf(this), 1);
+    }, function(_index) {
+        if (6 === (_done & 6)) {
+            triggers.splice(_index, 1);
             foo(b, c, function(_err, _r6) {
                 if (_err) return cb(_err);
                 f = _r6;
@@ -113,7 +113,7 @@ will compile to
     } ];
 
     function trigger() {
-        for (var i = trigger.length - 1; i >= 0; i--) {
+        for (var i = triggers.length - 1; i >= 0; i--) {
             triggers[i]();
         }
     }
