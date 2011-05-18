@@ -22,3 +22,7 @@ foo(function(_err, __r2) {
     _r2 = __r2;
     update();
 });
+
+foo(function(_err, _r4) {
+    if (_err) return cb(_err);
+});
