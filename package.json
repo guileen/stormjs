@@ -1,0 +1,23 @@
+{
+  "author": "Gui Lin <guileen@gmail.com>",
+  "name": "storm",
+  "description": "StormJS, high performance, intelligence compiler.",
+  "version": "0.0.1",
+  "homepage": "http://guileen.github.com/stormjs/",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/guileen/stormjs.git"
+  },
+  "directories": {
+  },
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+    "uglify-js": "*"
+  },
+  "devDependencies": {},
+  "bin"  : {
+    "storm": "./bin/storm"
+  }
+}
