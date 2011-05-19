@@ -1,4 +1,4 @@
-var _r1, _r2, a, x;
+var _r1, _r2, a;
 
 var count = 2;
 
