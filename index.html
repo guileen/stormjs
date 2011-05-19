@@ -1,1 +1,98 @@
-My Page
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>StormJS, Itelligence compiler for nodejs</title>
+    <style>
+      *{
+        margin: 0px;
+        padding: 0px;
+      }
+      #src{
+        width: 48%;
+        height: 30em;
+        float: left;
+      }
+      #target{
+        width: 48%;
+        float: right;
+        min-height: 30em;
+      }
+      .page{
+        width: 98%;
+        margin: 0 auto;
+      }
+      #messages{
+        clear:both;
+      }
+    </style>
+    <link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="page">
+      <!--[IF IE]>Does not support IE, please use a webkit browser like chrome or safari<![endif]-->
+      <header>
+        <h1>StormJS, itelligence compiler for nodejs</h1>
+        <h2><a href="http://github.com/guileen/stormjs">Fork me on github</a></h2>
+      </header>
+      <div class="main">
+        <textarea id="src"></textarea>
+        <pre id="target" class="prettyprint">
+        </pre>
+      </div>
+      <pre id='messages'></pre>
+    </div>
+    <!-- start port stormjs -->
+    <script>
+      // port nodejs
+      global = {};
+      module = {};
+      module.exports = exports = parse_js_exports = {};
+      process_js_exports = {};
+      uglify_js_exports = {
+        parser : parse_js_exports,
+        uglify : process_js_exports
+      }
+      function require(s){
+        if(s.indexOf('parse-js') >=0){
+          return parse_js_exports;
+          } else if(s.indexOf('process') >= 0){
+          return process_js_exports;
+          } else if(s.indexOf('uglify') >= 0){
+          return uglify_js_exports;
+          } else {
+          return {};
+        }
+      }
+      require.paths = [];
+    </script>
+    <script src="https://github.com/guileen/UglifyJS/raw/master/lib/parse-js.js"></script>
+    <script>
+      // port nodejs
+      module.exports = exports = process_js_exports;
+    </script>
+    <script src="https://github.com/guileen/UglifyJS/raw/master/lib/process.js"></script>
+    <script>
+      // port nodejs
+      module.exports = exports = storm = {};
+    </script>
+    <script src="https://github.com/guileen/stormjs/raw/master/lib/process.js"></script>
+    <!-- end port stormjs-->
+    <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+    <script>
+      // page script
+      var src = document.getElementById('src');
+      var target = document.getElementById('target');
+      var messages = document.getElementById('messages');
+      src.addEventListener('input', function(){
+        try{
+          target.innerHTML = storm.compile(src.value);
+          messages.innerHTML = '';
+          prettyPrint();
+          }catch(e){
+          messages.innerHTML = e.stack;
+        }
+      });
+      prettyPrint();
+    </script>
+  </body>
+</html>
