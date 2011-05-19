@@ -95,7 +95,7 @@ function testFile(filename) {
     fs.writeFileSync(__dirname + '/' + filename + '.out.js', target, 'utf-8');
     expect = target;
   } else {
-    export = fs.readFileSync(__dirname + '/' + filename + '.out.js', 'utf-8');
+    expect = fs.readFileSync(__dirname + '/' + filename + '.out.js', 'utf-8');
   }
 
   if (options.execute) {
