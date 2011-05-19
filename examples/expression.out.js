@@ -1,4 +1,4 @@
-var _r1, _r2, a;
+var _r1, _r2, a, x;
 
 var count = 2;
 
@@ -26,3 +26,5 @@ foo(function(_err, __r2) {
 foo(function(_err, _r4) {
     if (_err) return cb(_err);
 });
+
+var x;
