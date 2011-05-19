@@ -32,18 +32,18 @@ while (arg = args.shift()) {
 }
 
 if (options.filenames.length === 0) {
-  options.filenames = ['groups', 'steps', 'serial', 'parallel', 'expression'];
+  options.filenames = ['groups', 'steps', 'serial', 'parallel', 'expression', 'loop_parallel'];
 }
 
 function make_log(filename) {
-  var filename = filename + new Array(12 - filename.length).join(' ');
+  var filename = filename + new Array(16 - filename.length).join(' ');
   return function(s) {
     console.log(filename + ':' + s);
   }
 }
 
 function make_foo(filename) {
-  var filename = filename + new Array(12 - filename.length).join(' ');
+  var filename = filename + new Array(16 - filename.length).join(' ');
   var log = console.log;
   return function() {
     var args = Array.prototype.slice.call(arguments, 0),
