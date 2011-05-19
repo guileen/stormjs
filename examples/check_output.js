@@ -63,7 +63,6 @@ function make_foo(filename) {
 function testFile(filename) {
   filename = filename.replace(/\.js$/, '');
   var code = fs.readFileSync(__dirname + '/' + filename + '.js', 'utf-8');
-  var expect = fs.readFileSync(__dirname + '/' + filename + '.out.js', 'utf-8');
   var target;
   var src_ast = jsp.parse(code);
 
@@ -91,9 +90,12 @@ function testFile(filename) {
     console.log(target);
   }
 
+  var expect;
   if (options.overwrite) {
     fs.writeFileSync(__dirname + '/' + filename + '.out.js', target, 'utf-8');
     expect = target;
+  } else {
+    export = fs.readFileSync(__dirname + '/' + filename + '.out.js', 'utf-8');
   }
 
   if (options.execute) {
