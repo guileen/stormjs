@@ -1,4 +1,4 @@
-var sum, a, b, c, d;
+var sum, a, b, c, d, _r1, _r2, _r5, _r6, _r7;
 
 var _done = 0, triggers = [ function(_index) {
     if (3 === (_done & 3)) {

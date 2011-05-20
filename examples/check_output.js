@@ -116,4 +116,12 @@ function testFile(filename) {
 
 }
 
-options.filenames.forEach(testFile);
+options.filenames.forEach(function(filename){
+    try{
+      testFile(filename);
+      console.log(filename + ':OK');
+    } catch(e) {
+      console.log(filename + ':Fail');
+      console.log(e.stack);
+    }
+});
