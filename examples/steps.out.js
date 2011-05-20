@@ -1,10 +1,8 @@
-var a, b, c;
-
-var count = 2;
+var a, c, _r2, count = 2;
 
 function update() {
     if (--count === 0) {
-        foo(a, b, function(_err, _r3) {
+        foo(a, _r2, function(_err, _r3) {
             if (_err) return cb(_err);
             c = _r3;
             console.log("c=" + c);
@@ -19,9 +17,8 @@ foo(function(_err, _r1) {
     update();
 });
 
-foo(function(_err, _r2) {
+foo(function(_err, __r2) {
     if (_err) return cb(_err);
-    b = _r2;
-    console.log("b=" + b);
+    _r2 = __r2;
     update();
 });
