@@ -103,11 +103,11 @@
       var messages = document.getElementById('messages');
       var link = document.getElementById('link');
       var owner = document.getElementById('owner');
-      src.addEventListener('input', onInput);
-      owner.addEventListener('input', updateAnchor);
+      src.addEventListener('input', onInput, false);
+      owner.addEventListener('input', updateAnchor, false);
       link.addEventListener('click', function(){
         link.select();
-      });
+      }, false);
 
       setTimeout(function(){
         if(location.hash){
