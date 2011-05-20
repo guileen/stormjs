@@ -17,12 +17,26 @@
         float: right;
         min-height: 30em;
       }
+      #link{
+        width: 100%;
+        min-height: 2em;
+        height: auto;
+      }
       .page{
         width: 98%;
         margin: 0 auto;
       }
       #messages{
         clear:both;
+      }
+      p {
+        margin: 10px;
+        font-size: 16px;
+      }
+      #owner{
+        border: 1px solid gray;
+        font-size: 16px;
+        margin-left: 10px;
       }
     </style>
     <link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" />
@@ -34,12 +48,16 @@
         <h1>StormJS, itelligence compiler for nodejs</h1>
         <h2><a href="http://github.com/guileen/stormjs">Fork me on github</a></h2>
       </header>
+      <p><label>owner<input id="owner" type="text" value="" placeholder="input your name"></label></p>
       <div class="main">
         <textarea id="src"></textarea>
         <pre id="target" class="prettyprint">
         </pre>
+        <div style="clear:both;"/>
       </div>
       <pre id='messages'></pre>
+      <h3>Share your code</h3>
+      <textarea id="link"></textarea>
     </div>
     <!-- start port stormjs -->
     <script>
@@ -83,16 +101,40 @@
       var src = document.getElementById('src');
       var target = document.getElementById('target');
       var messages = document.getElementById('messages');
-      src.addEventListener('input', function(){
+      var link = document.getElementById('link');
+      var owner = document.getElementById('owner');
+      src.addEventListener('input', onInput);
+      owner.addEventListener('input', updateAnchor);
+      link.addEventListener('click', function(){
+        link.select();
+      });
+
+      setTimeout(function(){
+        if(location.hash){
+          var anchor = decodeURIComponent(location.hash.substring(1));
+          var i = anchor.indexOf('|');
+          owner.value = anchor.substring(0, i);
+          src.innerHTML = anchor.substring(i+1);
+        }
+        onInput();
+      }, 0);
+
+      function onInput(){
         try{
           target.innerHTML = storm.compile(src.value);
           messages.innerHTML = '';
           prettyPrint();
-          }catch(e){
+          updateAnchor();
+        }catch(e){
           messages.innerHTML = e.stack;
         }
-      });
-      prettyPrint();
+      }
+
+      function updateAnchor(){
+        var anchor = encodeURIComponent(owner.value + '|' + src.value);
+        location.hash = anchor;
+        link.innerHTML = location.href;
+      }
     </script>
   </body>
 </html>
