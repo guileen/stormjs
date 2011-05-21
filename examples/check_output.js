@@ -4,7 +4,7 @@
 var fs = require('fs'),
     jsp = require('uglify-js').parser,
     pro = require('uglify-js').uglify,
-    storm = require('../lib/process'),
+    storm = require('../lib/storm'),
     vm = require('vm'),
     assert = require('assert');
 
