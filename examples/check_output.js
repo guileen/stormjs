@@ -32,7 +32,7 @@ while (arg = args.shift()) {
 }
 
 if (options.filenames.length === 0) {
-  options.filenames = ['groups', 'steps', 'serial', 'parallel', 'expression', 'loop_parallel'];
+  options.filenames = ['groups', 'steps', 'serial', 'parallel', 'expression', 'loop_parallel', 'loop_serial'];
 }
 
 function make_log(filename) {

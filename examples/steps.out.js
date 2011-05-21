@@ -1,24 +1,24 @@
-var a, c, _r2, count = 2;
+var a, c, _1, _done = 0;
 
-function update() {
-    if (--count === 0) {
-        foo(a, _r2, function(_err, _r3) {
+function trigger(_flag) {
+    if (3 === ((_done |= _flag) & 3)) {
+        foo(a, _1, function(_err, _c) {
             if (_err) return cb(_err);
-            c = _r3;
+            c = _c;
             console.log("c=" + c);
         });
     }
 }
 
-foo(function(_err, _r1) {
+foo(function(_err, _a) {
     if (_err) return cb(_err);
-    a = _r1;
+    a = _a;
     console.log("a=" + a);
-    update();
+    trigger(1);
 });
 
-foo(function(_err, __r2) {
+foo(function(_err, __1) {
     if (_err) return cb(_err);
-    _r2 = __r2;
-    update();
+    _1 = __1;
+    trigger(2);
 });

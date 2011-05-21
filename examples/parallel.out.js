@@ -1,13 +1,13 @@
 var a, b;
 
-foo(function(_err, _r1) {
+foo(function(_err, _a) {
     if (_err) return cb(_err);
-    a = _r1;
+    a = _a;
     console.log("a=" + a);
 });
 
-foo(function(_err, _r2) {
+foo(function(_err, _b) {
     if (_err) return cb(_err);
-    b = _r2;
+    b = _b;
     console.log("b=" + b);
 });

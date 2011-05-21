@@ -1,11 +1,9 @@
-var a;
+var a, _i, _2, _done = 0;
 
-var count = 3;
-
-function update() {
-    if (--count === 0) {
-        for (var i = _r3, bar; i < _r4; i++) {
-            foo(a, function(_err, _r5) {
+function trigger(_flag) {
+    if (7 === ((_done |= _flag) & 7)) {
+        for (var i = _i, bar; i < _2; i++) {
+            foo(a, function(_err, _3) {
                 if (_err) return cb(_err);
             });
         }
@@ -13,30 +11,30 @@ function update() {
 }
 
 for (var i = 0; i < 100; i++) {
-    foo(i, function(_err, _r1) {
+    foo(i, function(_err, _1) {
         if (_err) return cb(_err);
     });
 }
 
-foo(function(_err, _r2) {
+foo(function(_err, _a) {
     if (_err) return cb(_err);
-    a = _r2;
+    a = _a;
     for (var i = 0, bar; i < 100; i++, bar = 0) {
-        foo(a, function(_err, _r6) {
+        foo(a, function(_err, _4) {
             if (_err) return cb(_err);
         });
     }
-    update();
+    trigger(4);
 });
 
-foo(function(_err, __r3) {
+foo(function(_err, __i) {
     if (_err) return cb(_err);
-    _r3 = __r3;
-    update();
+    _i = __i;
+    trigger(1);
 });
 
-foo(function(_err, __r4) {
+foo(function(_err, __2) {
     if (_err) return cb(_err);
-    _r4 = __r4;
-    update();
+    _2 = __2;
+    trigger(2);
 });

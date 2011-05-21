@@ -1,60 +1,58 @@
-var a, b, c, d, e, f;
+var a, b, c, d, e, f, _done = 0;
 
-var _done = 0, triggers = [ function(_index) {
+var triggers = [ function(_index) {
     if (3 === (_done & 3)) {
         triggers.splice(_index, 1);
-        foo(a, b, function(_err, _r4) {
+        foo(a, b, function(_err, _d) {
             if (_err) return cb(_err);
-            d = _r4;
+            d = _d;
             console.log("d=" + d);
         });
     }
 }, function(_index) {
     if (5 === (_done & 5)) {
         triggers.splice(_index, 1);
-        foo(a, c, function(_err, _r5) {
+        foo(a, c, function(_err, _e) {
             if (_err) return cb(_err);
-            e = _r5;
+            e = _e;
             console.log("e=" + e);
         });
     }
 }, function(_index) {
     if (6 === (_done & 6)) {
         triggers.splice(_index, 1);
-        foo(b, c, function(_err, _r6) {
+        foo(b, c, function(_err, _f) {
             if (_err) return cb(_err);
-            f = _r6;
+            f = _f;
             console.log("f=" + f);
         });
     }
 } ];
 
-function trigger() {
+function trigger(_flag) {
+    _done |= _flag;
     for (var i = triggers.length - 1; i >= 0; i--) {
         triggers[i](i);
     }
 }
 
-foo(function(_err, _r1) {
+foo(function(_err, _a) {
     if (_err) return cb(_err);
-    _done |= 1;
-    process.nextTick(trigger);
-    a = _r1;
+    a = _a;
     console.log("a=" + a);
+    trigger(1);
 });
 
-foo(function(_err, _r2) {
+foo(function(_err, _b) {
     if (_err) return cb(_err);
-    _done |= 2;
-    process.nextTick(trigger);
-    b = _r2;
+    b = _b;
     console.log("b=" + b);
+    trigger(2);
 });
 
-foo(function(_err, _r3) {
+foo(function(_err, _c) {
     if (_err) return cb(_err);
-    _done |= 4;
-    process.nextTick(trigger);
-    c = _r3;
+    c = _c;
     console.log("c=" + c);
+    trigger(4);
 });
