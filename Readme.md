@@ -1,7 +1,7 @@
-stormjs, intelligence compiler
+stormjs, intelligent compiler
 ========
 
-stormjs is a compiler inspired from streamlinejs.
+StormJS, intelligent compiler for nodejs
 
 Serial
 ----
