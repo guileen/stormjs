@@ -1,7 +1,9 @@
-stormjs, intelligent compiler
+stormjs, intelligent compiler for nodejs
 ========
 
-StormJS, intelligent compiler for nodejs
+If nodejs is assembly language, then stormjs is C language.
+
+Assembly language is fast, but hard to code, C can compile to target assembly code, and C is fastest compare to any other compiler.
 
 Serial
 ----
