@@ -37,7 +37,7 @@ var a = 0, b = 0, c;
         j = bar(j);
         b += 1;
         next(++i, j);
-    } else after()
+    } else after();
 })(0, 0, function() {
     console.log(b);
     trigger(1);
