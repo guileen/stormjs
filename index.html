@@ -33,7 +33,11 @@
         margin: 10px;
         font-size: 16px;
       }
-      #owner{
+      label {
+        display: inline-block;
+        width: 100px;
+      }
+      input{
         border: 1px solid gray;
         font-size: 16px;
         margin-left: 10px;
@@ -48,7 +52,9 @@
         <h1>StormJS, itelligence compiler for nodejs</h1>
         <h2><a href="http://github.com/guileen/stormjs">Fork me on github</a></h2>
       </header>
-      <p><label>owner<input id="owner" type="text" value="" placeholder="input your name"></label></p>
+      <p><label>owner</label><input id="owner" type="text" value="" placeholder="input your name"></p>
+      <p><label>Async Mark</label><input id="async-mark" type="text" value="Async" placeholder="input async mark"></label></p>
+      <p><label>Callback Mark</label><input id="callback-mark" type="text" value="_" placeholder="input callback mark"></p>
       <div class="main">
         <textarea id="src"></textarea>
         <pre id="target" class="prettyprint">
@@ -103,6 +109,8 @@
       var messages = document.getElementById('messages');
       var link = document.getElementById('link');
       var owner = document.getElementById('owner');
+      var asyncMark = document.getElementById('async-mark');
+      var callbackMark = document.getElementById('callback-mark');
       src.addEventListener('input', onInput, false);
       owner.addEventListener('input', updateAnchor, false);
       link.addEventListener('click', function(){
@@ -121,7 +129,12 @@
 
       function onInput(){
         try{
-          target.innerHTML = storm.compile(src.value);
+          target.innerHTML = storm.compile(src.value, {
+            keywords : {
+              async_mark : asyncMark.value,
+              callback_mark : callbackMark.value
+            }
+          });
           messages.innerHTML = '';
           prettyPrint();
           updateAnchor();
