@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>StormJS, Itelligence compiler for nodejs</title>
+    <style>
+      *{
+        margin: 0px;
+        padding: 0px;
+      }
+      #src{
+        width: 48%;
+        height: 30em;
+        float: left;
+      }
+      #target{
+        width: 48%;
+        float: right;
+        min-height: 30em;
+      }
+      #link{
+        width: 100%;
+        min-height: 2em;
+        height: auto;
+      }
+      .page{
+        width: 98%;
+        margin: 0 auto;
+      }
+      #messages{
+        clear:both;
+      }
+      p {
+        margin: 10px;
+        font-size: 16px;
+      }
+      label {
+        display: inline-block;
+        width: 100px;
+      }
+      input{
+        border: 1px solid gray;
+        font-size: 16px;
+        margin-left: 10px;
+      }
+    </style>
+    <link href="../prettify/distrib/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="page">
+      <!--[IF IE]>Does not support IE, please use a webkit browser like chrome or safari<![endif]-->
+      <header>
+        <h1>StormJS, itelligence compiler for nodejs</h1>
+        <h2><a href="http://github.com/guileen/stormjs">Fork me on github</a></h2>
+      </header>
+      <p><label>owner</label><input id="owner" type="text" value="" placeholder="input your name"></p>
+      <p><label>Async Mark</label><input id="async-mark" type="text" value="Async" placeholder="input async mark"></label></p>
+      <p><label>Callback Mark</label><input id="callback-mark" type="text" value="_" placeholder="input callback mark"></p>
+      <div class="main">
+        <textarea id="src"></textarea>
+        <pre id="target" class="prettyprint">
+        </pre>
+        <div style="clear:both;"/>
+      </div>
+      <pre id='messages'></pre>
+      <h3>Share your code</h3>
+      <textarea id="link"></textarea>
+    </div>
+    <!-- start port stormjs -->
+    <script>
+      // port nodejs
+      global = {};
+      module = {};
+      module.exports = exports = parse_js_exports = {};
+      process_js_exports = {};
+      uglify_js_exports = {
+        parser : parse_js_exports,
+        uglify : process_js_exports
+      }
+      function require(s){
+        if(s.indexOf('parse-js') >=0){
+          return parse_js_exports;
+        } else if(s.indexOf('process') >= 0){
+          return process_js_exports;
+        } else if(s.indexOf('uglify') >= 0){
+          return uglify_js_exports;
+        } else {
+          return {};
+        }
+      }
+      require.paths = [];
+    </script>
+    <script src="../uglify-js/lib/parse-js.js"></script>
+    <script>
+      // port nodejs
+      module.exports = exports = process_js_exports;
+    </script>
+    <script src="../uglify-js/lib/process.js"></script>
+    <script>
+      // port nodejs
+      module.exports = exports = storm = {};
+    </script>
+    <script src="./lib/storm.js"></script>
+    <!-- end port stormjs-->
+    <script src="../prettify/distrib/google-code-prettify/prettify.js"></script>
+    <script>
+      // page script
+      var src = document.getElementById('src');
+      var target = document.getElementById('target');
+      var messages = document.getElementById('messages');
+      var link = document.getElementById('link');
+      var owner = document.getElementById('owner');
+      var asyncMark = document.getElementById('async-mark');
+      var callbackMark = document.getElementById('callback-mark');
+      src.addEventListener('input', onInput, false);
+      owner.addEventListener('input', updateAnchor, false);
+      link.addEventListener('click', function(){
+        link.select();
+      }, false);
+
+      setTimeout(function(){
+        if(location.hash){
+          var anchor = decodeURIComponent(location.hash.substring(1));
+          var i = anchor.indexOf('|');
+          owner.value = anchor.substring(0, i);
+          src.innerHTML = anchor.substring(i+1);
+        }
+        onInput();
+      }, 0);
+
+      function onInput(){
+        try{
+          target.innerHTML = storm.compile(src.value, {
+            keywords : {
+              async_mark : asyncMark.value,
+              callback_mark : callbackMark.value
+            }
+          });
+          messages.innerHTML = '';
+          prettyPrint();
+          updateAnchor();
+        }catch(e){
+          messages.innerHTML = e.stack;
+        }
+      }
+
+      function updateAnchor(){
+        var anchor = encodeURIComponent(owner.value + '|' + src.value);
+        location.hash = anchor;
+        link.innerHTML = location.href;
+      }
+    </script>
+  </body>
+</html>

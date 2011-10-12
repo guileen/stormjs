@@ -76,7 +76,13 @@ function testFile(filename) {
     console.log(code);
   }
 
-  var target_ast = storm.stormfy(src_ast, 'cb');
+  var target_ast = storm.stormfy(src_ast, {
+      callback_name: 'cb',
+      keywords: {
+        async_mark: 'Async',
+        callback_mark: '_'
+      }
+  });
 
   if (options.ast) {
     console.log(filename + ': target ast');
